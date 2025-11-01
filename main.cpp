@@ -14,7 +14,7 @@ int** make(size_t rows, const size_t* lns)
 {
   int** mtx = new int*[rows];
   for (size_t i = 0; i < rows; i++)
-    mtx[i] = nullptr; // another check to not delete by mistake
+    mtx[i] = nullptr; // another check to not delete lns[i] by mistake
 
   for (size_t i = 0; i < rows; i++) 
   {
@@ -42,7 +42,7 @@ void output(const int* const* mtx, size_t rows, const size_t* lns)
 }
 
 int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
-{
+{ // this function must be a solution to a task from today's lesson
   int** result = make(rows, lns);
   size_t start = 0;
 
