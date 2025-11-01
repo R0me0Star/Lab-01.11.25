@@ -50,10 +50,10 @@ int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
   {
     for (size_t j = 0; j < lns[i]; j++)
     {
-      if (start + j >= n) // I use runtime_error to throw logic errors
+      if (start + j >= n)
       {
         rm(result, rows); // check on borders of array
-        throw std::runtime_error("Beyond the borders of array");
+        throw std::logic_error("Logic error. Beyond the borders of array. Sum of lns > n");
       }
       result[i][j] = t[start + j];
     }
@@ -63,7 +63,7 @@ int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
   if (start != n)
   {
     rm(result, rows); // check on lns
-    throw std::runtime_error("Sum of lns < n");
+    throw std::logic_error("Logic error. Sum of lns < n");
   }
   return result;
 }
@@ -85,7 +85,7 @@ int main()
 
     if (std::cin.fail())
     {
-      std::cerr << "Input error with t\n";
+      std::cerr << "Input error\n";
       delete[] t;
       delete[] lns;
       return 1;
@@ -97,7 +97,7 @@ int main()
 
     if (std::cin.fail())
     {
-      std::cerr << "Input error with lns\n";
+      std::cerr << "Input error\n";
       delete[] t;
       delete[] lns;
       return 1;
@@ -113,7 +113,7 @@ int main()
     return 2; // memory error
   }
 
-  catch (const std::runtime_error& e)
+  catch (const std::logic_error& e)
   {
     std::cerr << e.what() << '\n'; // catching logic errors
     return 3;
